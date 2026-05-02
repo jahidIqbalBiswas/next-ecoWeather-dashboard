@@ -1,8 +1,9 @@
 import { getAQIData } from "@/lib/weather-info";
 import Image from "next/image";
 import Card from "./Card";
-const AQIComponent = async ({ lat, long }) => {
-  const { main, components } = await getAQIData(lat, lat);
+const AQIComponent = async ({ lat, lon }) => {
+  const { main, components } = (await getAQIData(lat, lon)) || {};
+
   function getAQIRating(aqi) {
     let rating;
 
@@ -47,7 +48,7 @@ const AQIComponent = async ({ lat, long }) => {
             Air Quality Index
           </div>
           <span className="text-right text-sm text-white lg:text-base">
-            {getAQIRating(main.aqi)}
+            {getAQIRating(main?.aqi)}
           </span>
         </div>
 
@@ -63,7 +64,7 @@ const AQIComponent = async ({ lat, long }) => {
             Carbon Monoxide
           </div>
           <span className="text-right text-sm text-white lg:text-base">
-            {components.co} µg/m³
+            {components?.co} µg/m³
           </span>
         </div>
 
@@ -79,7 +80,7 @@ const AQIComponent = async ({ lat, long }) => {
             Nitric Oxide
           </div>
           <span className="text-right text-sm text-white lg:text-base">
-            {components.no} ppm
+            {components?.no} ppm
           </span>
         </div>
 
@@ -95,7 +96,7 @@ const AQIComponent = async ({ lat, long }) => {
             Nitrogen Dioxide
           </div>
           <span className="text-right text-sm text-white lg:text-base">
-            {components.no2} ppm
+            {components?.no2} ppm
           </span>
         </div>
 
@@ -111,7 +112,7 @@ const AQIComponent = async ({ lat, long }) => {
             Ozone
           </div>
           <span className="text-right text-sm text-white lg:text-base">
-            {components.o3} µg/m³
+            {components?.o3} µg/m³
           </span>
         </div>
 
@@ -127,7 +128,7 @@ const AQIComponent = async ({ lat, long }) => {
             Sulfur Dioxide
           </div>
           <span className="text-right text-sm text-white lg:text-base">
-            {components.so2} ppm
+            {components?.so2} ppm
           </span>
         </div>
 
@@ -143,7 +144,7 @@ const AQIComponent = async ({ lat, long }) => {
             PM2.5
           </div>
           <span className="text-right text-sm text-white lg:text-base">
-            {components.pm2_5} µg/m³
+            {components?.pm2_5} µg/m³
           </span>
         </div>
       </div>
